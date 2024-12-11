@@ -1,2 +1,4 @@
 # AmplitudeSDK
-SDK To Track Events On Amplitude.
+A cross-platform SDK for interacting with Amplitude.
+
+Hope that helps! :smiley:
