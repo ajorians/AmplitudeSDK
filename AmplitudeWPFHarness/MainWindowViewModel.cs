@@ -2,39 +2,36 @@
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
-namespace TestWpfApp
+namespace AmplitudeWPFHarness
 {
-   public class MainWindowViewModel : INotifyPropertyChanged
-   {
-      private readonly AmplitudeInterop.Interop _interop;
-      public MainWindowViewModel()
-      {
-         _interop = new AmplitudeInterop.Interop();
+    public class MainWindowViewModel : INotifyPropertyChanged
+    {
+        //private readonly AmplitudeInterop.Interop _interop;
+        public MainWindowViewModel()
+        {
+            //_interop = new AmplitudeInterop.Interop();
 
-         _interop.OnValueChanged += ( s, e ) =>
-         {
-            NotifyPropertyChanged( nameof( CurrentValue ) );
-         };
+            //_interop.OnValueChanged += ( s, e ) =>
+            //{
+            NotifyPropertyChanged(nameof(CurrentValue));
+            //};
 
-         _incrementCommand = new RelayCommand( () => _interop.IncrementValue() );
-      }
+            //_incrementCommand = new RelayCommand( () => _interop.IncrementValue() );
+        }
 
-      public int CurrentValue
-      {
-         get => _interop.GetValue();
-      }
+        static public int CurrentValue => 0; // _interop.GetValue();
 
-      private ICommand _incrementCommand;
-      public ICommand IncrementCommand
-      {
-         get => _incrementCommand;
-      }
+        //private ICommand _incrementCommand;
+        //public ICommand IncrementCommand
+        //{
+        //   get => _incrementCommand;
+        //}
 
-      private void NotifyPropertyChanged( [CallerMemberName] string propertyName = "" )
-      {
-         PropertyChanged?.Invoke( this, new PropertyChangedEventArgs( propertyName ) );
-      }
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
-      public event PropertyChangedEventHandler PropertyChanged;
-   }
+        public event PropertyChangedEventHandler PropertyChanged;
+    }
 }
