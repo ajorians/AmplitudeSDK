@@ -16,7 +16,7 @@ namespace AmplitudeSDK
                  std::shared_ptr<IAmplitudeBackgroundEventTransmitter> amplitudeBackgroundEventTransmitter );
       ~Amplitude();
 
-      void Attach() override;
+      void Attach() override;//TODO
       void Detach() override;
 
       void StartSession() override;
