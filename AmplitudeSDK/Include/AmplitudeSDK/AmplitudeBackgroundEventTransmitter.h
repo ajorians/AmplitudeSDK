@@ -28,6 +28,9 @@ namespace AmplitudeSDK
       void AddEvent(const AmplitudeEvent& amplitudeEvent) override;
 
    private:
+      void DoAnalytics();
+
+   private:
       std::shared_ptr<IAmplitudeNetworkCalls> _amplitudeNetworkCalls;
       std::shared_ptr<IAmplitudeEventQueue> _amplitudeEventQueue;
       std::shared_ptr<IAmplitudeExponentialBackoff> _exponentialBackoff;

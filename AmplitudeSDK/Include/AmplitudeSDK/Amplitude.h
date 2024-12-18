@@ -25,7 +25,7 @@ namespace AmplitudeSDK
 
       void Shutdown() override;
 
-      void TrackEventWithProperties(const std::string& eventName, const std::map<std::string, std::string>& properties) override;
+      void TrackEventWithProperties(const std::string& eventName, const std::map<std::string, std::string>& eventProperties) override;
 
    private:
       std::shared_ptr<IAmplitudeEventFactory> _amplitudeEventFactory;

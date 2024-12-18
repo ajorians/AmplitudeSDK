@@ -25,6 +25,6 @@ namespace AmplitudeSDK
       virtual void Shutdown() = 0;
 
       //void return on purpose.  You assume it'll be successfully tracked.
-      virtual void TrackEventWithProperties( const std::string& eventName, const std::map<std::string, std::string>& properties) = 0;
+      virtual void TrackEventWithProperties( const std::string& eventName, const std::map<std::string, std::string>& eventProperties) = 0;
    };
 }
