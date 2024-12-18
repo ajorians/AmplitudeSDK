@@ -2,7 +2,12 @@
 
 using namespace AmplitudeSDK;
 
-AmplitudeBackgroundEventTransmitter::AmplitudeBackgroundEventTransmitter()
+AmplitudeBackgroundEventTransmitter::AmplitudeBackgroundEventTransmitter( std::shared_ptr<IAmplitudeNetworkCalls> amplitudeNetworkCalls,
+                                                                          std::shared_ptr<IAmplitudeEventQueue> amplitudeEventQueue,
+                                                                          std::shared_ptr<IAmplitudeExponentialBackoff> exponentialBackoff )
+   : _amplitudeNetworkCalls( std::move( amplitudeNetworkCalls ) )
+   , _amplitudeEventQueue( std::move( amplitudeEventQueue ) )
+   , _exponentialBackoff( std::move( exponentialBackoff ) )
 {
 
 }

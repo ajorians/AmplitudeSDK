@@ -2,16 +2,22 @@ add_library(AmplitudeSDK STATIC
                Source/Amplitude.cpp
                Source/AmplitudeBackgroundEventTransmitter.cpp
                Source/AmplitudeEventFactory.cpp
+               Source/AmplitudeEventQueue.cpp
+               Source/AmplitudeExponentialBackoff.cpp
                Source/AmplitudeNetworkCalls.cpp
                Source/httplib.h
                Include/AmplitudeSDK/Amplitude.h
                Include/AmplitudeSDK/AmplitudeBackgroundEventTransmitter.h
                Include/AmplitudeSDK/AmplitudeEvent.h
                Include/AmplitudeSDK/AmplitudeEventFactory.h
+               Include/AmplitudeSDK/AmplitudeEventQueue.h
+               Include/AmplitudeSDK/AmplitudeExponentialBackoff.h
                Include/AmplitudeSDK/AmplitudeNetworkCalls.h
                Include/AmplitudeSDK/IAmplitude.h
                Include/AmplitudeSDK/IAmplitudeBackgroundEventTransmitter.h
                Include/AmplitudeSDK/IAmplitudeEventFactory.h
+               Include/AmplitudeSDK/IAmplitudeEventQueue.h
+               Include/AmplitudeSDK/IAmplitudeExponentialBackoff.h
                Include/AmplitudeSDK/IAmplitudeNetworkCalls.h)
 
 set_property(TARGET AmplitudeSDK PROPERTY CXX_STANDARD 20)

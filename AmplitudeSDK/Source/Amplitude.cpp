@@ -1,5 +1,7 @@
 #include "AmplitudeSDK/Amplitude.h"
 
+#include "AmplitudeSDK/IAmplitudeBackgroundEventTransmitter.h"
+
 using namespace AmplitudeSDK;
 
 Amplitude::Amplitude( std::shared_ptr<IAmplitudeEventFactory> amplitudeEventFactory,
@@ -7,6 +9,7 @@ Amplitude::Amplitude( std::shared_ptr<IAmplitudeEventFactory> amplitudeEventFact
    : _amplitudeEventFactory( std::move( amplitudeEventFactory ) )
    , _amplitudeBackgroundEventTransmitter( std::move( amplitudeBackgroundEventTransmitter ) )
 {
+   _amplitudeBackgroundEventTransmitter->Startup();
 }
 
 Amplitude::~Amplitude()
