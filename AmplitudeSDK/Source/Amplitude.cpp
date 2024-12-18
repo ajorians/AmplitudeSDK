@@ -16,7 +16,7 @@ Amplitude::Amplitude( std::shared_ptr<IAmplitudeEventFactory> amplitudeEventFact
 
 Amplitude::~Amplitude()
 {
-
+   Shutdown();
 }
 
 void Amplitude::Attach()

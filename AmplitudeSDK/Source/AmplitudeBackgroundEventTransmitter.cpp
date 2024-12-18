@@ -24,7 +24,7 @@ AmplitudeBackgroundEventTransmitter::AmplitudeBackgroundEventTransmitter( std::s
 
 AmplitudeBackgroundEventTransmitter::~AmplitudeBackgroundEventTransmitter()
 {
-
+   Shutdown();
 }
 
 void AmplitudeBackgroundEventTransmitter::Startup()
@@ -43,12 +43,19 @@ void AmplitudeBackgroundEventTransmitter::Startup()
 
 void AmplitudeBackgroundEventTransmitter::BeginShutdown()
 {
-
+   _beginShutdown = true;
 }
 
 void AmplitudeBackgroundEventTransmitter::Shutdown()
 {
+   _keepRunning = false;
+   if ( _workerThread.joinable() )
+   {
+      _workerThread.join();
+   }
 
+   //Tell event queue to pack up all pending events to a file
+   _amplitudeEventQueue->PersistAllEvents();
 }
 
 void AmplitudeBackgroundEventTransmitter::AddEvent( const AmplitudeEvent& amplitudeEvent )

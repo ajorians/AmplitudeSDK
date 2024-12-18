@@ -16,7 +16,7 @@ namespace AmplitudeSDK
       void Reset() override;
 
    private:
-      /*DateTime _startTime;*/
+      std::chrono::time_point<std::chrono::steady_clock> _startTime;
       int _retryCount = 0;
       int _pow = 1;
       std::chrono::milliseconds _currentDelay;
