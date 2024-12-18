@@ -1,4 +1,4 @@
-#include "Amplitude.h"
+#include "AmplitudeSDK/Amplitude.h"
 
 using namespace AmplitudeSDK;
 
