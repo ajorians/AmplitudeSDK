@@ -2,19 +2,44 @@
 
 using namespace AmplitudeSDK;
 
-constexpr int StartingValue = 0;
-
-Amplitude::Amplitude()
-   : _currentValue( StartingValue )
+Amplitude::Amplitude( std::shared_ptr<IAmplitudeEventFactory> amplitudeEventFactory,
+                      std::shared_ptr<IAmplitudeBackgroundEventTransmitter> amplitudeBackgroundEventTransmitter )
+   : _amplitudeEventFactory( std::move( amplitudeEventFactory ) )
+   , _amplitudeBackgroundEventTransmitter( std::move( amplitudeBackgroundEventTransmitter ) )
 {
 }
 
-int Amplitude::GetValue() const
+Amplitude::~Amplitude()
 {
-   return _currentValue;
+
 }
 
-void Amplitude::IncrementValue()
+void Amplitude::Attach()
 {
-   _currentValue++;
+
+}
+
+void Amplitude::Detach()
+{
+
+}
+
+void Amplitude::StartSession()
+{
+
+}
+
+void Amplitude::StopSession()
+{
+
+}
+
+void Amplitude::Shutdown()
+{
+
+}
+
+void Amplitude::TrackEventWithProperties(const std::string& eventName, const std::map<std::string, std::string>& properties)
+{
+
 }
