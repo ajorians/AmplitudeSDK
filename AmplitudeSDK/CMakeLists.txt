@@ -18,7 +18,10 @@ add_library(AmplitudeSDK STATIC
                Include/AmplitudeSDK/IAmplitudeEventFactory.h
                Include/AmplitudeSDK/IAmplitudeEventQueue.h
                Include/AmplitudeSDK/IAmplitudeExponentialBackoff.h
-               Include/AmplitudeSDK/IAmplitudeNetworkCalls.h)
+               Include/AmplitudeSDK/IAmplitudeNetworkCalls.h
+               Include/AmplitudeSDK/IDeviceIDRetriever.h
+               Include/AmplitudeSDK/IUserIDRetriever.h
+               Include/AmplitudeSDK/IUserPropertiesRetriever.h)
 
 set_property(TARGET AmplitudeSDK PROPERTY CXX_STANDARD 20)
 
