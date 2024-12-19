@@ -1,6 +1,17 @@
 #include "AmplitudeSDK/AmplitudeEventQueue.h"
 
 #include <algorithm>
+#include <chrono>
+#include <filesystem>//TODO: Use utilities instead
+
+namespace
+{
+   std::string GetCurrentDate()
+   {
+      auto const time = std::chrono::current_zone()->to_local(std::chrono::system_clock::now());
+      return std::format("{:%Y-%m-%d}", time);
+   }
+}
 
 using namespace AmplitudeSDK;
 
@@ -113,30 +124,30 @@ void AmplitudeEventQueue::PersistAllEvents()
 {
    std::lock_guard lock(_lockPendingEvents);
 
-   //if ( !_persistEventPath.empty() )
-   //{
-   //   string filename = Path.ChangeExtension(DateTime.Now.ToString("yyyy-MM-dd"), ".dat");
-   //   string filePath = Path.Combine(_persistEventPath, filename);
+   if ( !_persistEventPath.empty() )
+   {
+      std::string filename = GetCurrentDate() + ".dat";
+      std::string filePath = _persistEventPath + filename;//TODO: Use FileUtil::CombinePath
 
-   //   //There might be events from today.  Would like to preserve them
-   //   List<AmplitudeEvent> existingObjects = new();
+      //There might be events from today.  Would like to preserve them
+      std::vector<AmplitudeEvent> existingObjects;
 
-   //   if (File.Exists(filePath))
-   //   {
-   //      string existingJson = File.ReadAllText(filePath);
+      if( std::filesystem::exists(filePath) )
+      {
+         //std::string existingJson = File.ReadAllText(filePath);
    //      if (!string.IsNullOrWhiteSpace(existingJson))
    //      {
    //         existingObjects = JsonConvert.DeserializeObject<List<AmplitudeEvent>>(existingJson) ? ? new List<AmplitudeEvent>();
    //      }
-   //   }
+      }
 
-   //   // Append new objects
-   //   existingObjects.AddRange(_pendingEvents);
+      // Append new objects
+      _pendingEvents.insert(_pendingEvents.end(), existingObjects.begin(), existingObjects.end());
 
    //   string jsonString = JsonConvert.SerializeObject(existingObjects, Formatting.Indented);
 
    //   File.WriteAllText(filePath, jsonString);
-   //}
+   }
 
    _pendingEvents.clear();
 }
