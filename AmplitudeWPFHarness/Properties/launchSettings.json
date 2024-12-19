@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "WPFCamtasiaExe": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    },
+    "Show JTBD": {
+      "commandName": "Project",
+      "commandLineArgs": "/jtbd",
+      "nativeDebugging": true
+    }
+  }
+}

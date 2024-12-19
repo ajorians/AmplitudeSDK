@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<!-- README
+
+What is this?
+- Defines a set of default project settings
+
+How does it work?
+- This file will be automatically imported by any project containing the following directives (included by default)
+    - <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" /> (C++)
+    - <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" /> (C#)
+- Imported early in the build process so that individual project settings can override any settings defined here
+- When searching for a Directory.Build.props file, MSBuild walks the directory structure upwards from your project location ($(MSBuildProjectFullPath))
+    and stops after it locates one
+
+How do I override or ignore these settings?
+- It's possible these are settings being appied but won't work for your project, in that case you have a few options:
+    - If you want to ignore all settings, create an empty Directory.Build.props in your subfolder that doesn't import anything
+    - If you want to inherit these settings, but override some or define others, include the following directive in your Directory.Build.props in your subfolder
+        - <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+    - If you want to override just one setting or two for a particular project, any setting defined in the project will take priority over those listed here
+
+I made a change here but it's not working?
+- Make sure your project has the proper "Import" directive mentioned above
+- Make sure any build properties you're using are actually defined. You may need to modify Directory.Build.targets instead or use a different property
+    - TIP: Use a Message target to print out values on build, example:
+        <Target Name="EmitCustomMessage" AfterTargets="Build">
+          <Message Importance="High" Text="The solution has completed the Build target for $(ProjectName)" />
+        </Target>
+- Make sure there isn't another Directory.Build.props closer in the directory tree
+- Make sure your project doesn't override the setting by redefining it or including another props file that redefines it
+- Try and reload the solution or open/close Visual Studio to update the UI and make sure changes apply
+- Depending on the setting changed, it may take a project rebuild to take effect
+
+See https://docs.microsoft.com/en-us/visualstudio/msbuild/customize-your-build?view=vs-2019 for more details
+
+-->
+
+<Project>
+  <!--<Import Condition="Exists($([MSBuild]::GetPathOfFileAbove(Directory.Build.props, $(MSBuildThisFileDirectory)..)))" Project="$([MSBuild]::GetPathOfFileAbove(Directory.Build.props, $(MSBuildThisFileDirectory)..))" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$([MSBuild]::GetPathOfFileAbove('CommonPropertyMacros.props', '$(MSBuildThisFileDirectory)'))" />
+  </ImportGroup>-->
+
+  <PropertyGroup>
+    <BuildOutputDirectory>$(SolutionDir)builds\x64\$(Configuration)\</BuildOutputDirectory>
+    <MSTestBuildOutputDirectory>$(SolutionDir)builds\MSTest\$(Platform)\$(Configuration)</MSTestBuildOutputDirectory>
+    <SolutionDir Condition="'$(SolutionDir)' == ''">$(MSBuildThisFileDirectory)</SolutionDir>
+  </PropertyGroup>
+
+  <!-- csproj Settings -->
+  <PropertyGroup Condition="'$(MSBuildProjectExtension)'=='.csproj'">
+    <TargetFrameworks>net472</TargetFrameworks>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsNotAsErrors>NU1901;NU1902;NU1903;NU1904</WarningsNotAsErrors>
+    <NoWarn>$(NoWarn);NU1507</NoWarn>
+    <OutputPath>$(BuildOutputDirectory)</OutputPath>
+    <LangVersion>latest</LangVersion>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <CopyDebugSymbolFilesFromPackages>true</CopyDebugSymbolFilesFromPackages>
+
+    <AnalysisLevel>latest</AnalysisLevel>
+    <AnalysisLevelStyle>preview</AnalysisLevelStyle> <!-- Workaround to enforce IDEXXXX errors. Can be removed when using .NET 9 -->
+    <AnalysisMode>All</AnalysisMode>
+    <AnalysisModeDocumentation>None</AnalysisModeDocumentation>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+  </PropertyGroup>
+
+  <Target Name="EnforceSDKProjects" BeforeTargets="BeforeBuild">
+    <Error Condition="'$(UsingMicrosoftNETSdk)'!='true'" Text="Error checking requirements for project: $(ProjectName). Projects must be using the .NET sdk" />
+  </Target>
+
+   <!-- Overrides or additional settings just for test projects -->
+  <PropertyGroup Condition="$(MSBuildProjectFile.EndsWith('Test.csproj'))">
+    <OutputPath>$(MSTestBuildOutputDirectory)</OutputPath>
+    <EnableNETAnalyzers>false</EnableNETAnalyzers>
+  </PropertyGroup>
+
+</Project>

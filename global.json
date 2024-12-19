@@ -1,0 +1,10 @@
+{
+  "__comment": "https://github.com/Microsoft/MSBuildSdks for more information",
+  "msbuild-sdks": {
+    "Microsoft.Build.NoTargets": "3.5.6"
+  },
+  "sdk": {
+    "version": "8.0.303",
+    "rollForward": "latestPatch"
+  }
+}

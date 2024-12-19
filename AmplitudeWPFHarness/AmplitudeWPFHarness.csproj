@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<RootNamespace>AmplitudeWPFHarness</RootNamespace>
+		<AssemblyName>AmplitudeWPFHarness</AssemblyName>
+		<EnableDefaultApplicationDefinition>false</EnableDefaultApplicationDefinition>
+		<UseWPF>true</UseWPF>
+	</PropertyGroup>
+</Project>

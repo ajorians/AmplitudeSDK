@@ -5,14 +5,14 @@ using System.IO;
 using System.Windows;
 using Microsoft.Win32;
 
-namespace TestWpfApp
+namespace AmplitudeWPFHarness
 {
-   public partial class MainWindow : Window
-   {
-      public MainWindow()
-      {
-         InitializeComponent();
-         DataContext = new MainWindowViewModel();
-      }
-   }
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+            DataContext = new MainWindowViewModel();
+        }
+    }
 }
